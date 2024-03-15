@@ -1,0 +1,125 @@
+
+%\def\arraystretch{1.4}  
+
+\usepackage[all]{xy}
+%\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listings}
+%\usepackage{mathrsfs}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{tikz-cd}
+\usepackage{tkz-berge}
+\usepackage{tkz-graph}
+%\usepackage{verbatim}
+%\usetikzlibrary{arrows,shapes}
+
+\newcommand{\StrongNeg}{\sim\hspace{-0.05in}}
+
+\newcommand{\opname}[1]{\ensuremath{\text{\textsf{#1}}}}
+\newcommand{\propname}[1]{\ensuremath{\text{\textsc{#1}}}}
+
+\newcommand{\Class}[1]{\mathbf{{#1}}}
+\newcommand{\ClassErr}{\Class{Errors}}
+\newcommand{\ClassASG}[1]{\Class{ASG}({#1})}
+\newcommand{\ClassSG}[1]{{\Class{SG}({#1})}}
+\newcommand{\ClassMSG}[1]{{\Class{MSG}({#1})}}
+\newcommand{\ClassOR}[1]{{\Class{OR}({#1})}}
+\newcommand{\ClassBS}[1]{{\Class{BS}({#1})}}
+\newcommand{\ClassOS}[1]{{\Class{OS}({#1})}}
+\newcommand{\ClassCarrier}[1]{{\Class{EQ}({#1})}}
+
+% carrier sets
+
+\newcommand{\CarrierSemantics}[1]{ M({#1}) }
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\SetSingleton}[1]{ \{ {#1} \} }
+\newcommand{\SetSum}[2]{{{#1}}\uplus  {#2}}
+\newcommand{\SetProduct}[2]{{{#1}} \times {#2}}
+\newcommand{\ListSet}[1]{\mathrm{list}({#1})}
+\newcommand{\FinPowerSet}[1]{\ensuremath{{\mathcal P}_{fin}({#1})}}
+\newcommand{\MinPowerSet}[2]{\ensuremath{{\mathcal P}_{fin}^{{#1}}({#2})}}   
+
+% terms
+\newcommand{\Inl}[1]{\ensuremath{\mathrm{Inl}\ {#1}}}
+\newcommand{\Inr}[1]{\ensuremath{\mathrm{Inr}\ {#1}}}
+\newcommand{\InlP}[1]{\ensuremath{\mathrm{Inl}({#1})}}
+\newcommand{\InrP}[1]{\ensuremath{\mathrm{Inr}({#1})}}
+
+% combinators 
+\newcommand{\ComboName}[1]{\mbox{\textbf{{#1}}}}
+
+\newcommand{\PlusCombo}{\ComboName{Plus}}
+\newcommand{\TimesCombo}{\ComboName{Times}}
+\newcommand{\MinCombo}{\ComboName{Min}}
+\newcommand{\MaxCombo}{\ComboName{Max}}
+\newcommand{\AndCombo}{\ComboName{And}}
+\newcommand{\OrCombo}{\ComboName{Or}}
+\newcommand{\UnionCombo}{\ComboName{Union}}
+\newcommand{\ConcatCombo}{\ComboName{Concat}}
+\newcommand{\IntersectCombo}{\ComboName{Intersect}}
+\newcommand{\IntersectUnionCombo}{\ComboName{IntersectUnion}}
+\newcommand{\UnionIntersectCombo}{\ComboName{UnionIntersect}}
+
+\newcommand{\LeftNaturalOrder}[1]{\leq_{#1}^{L}}
+\newcommand{\RightNaturalOrder}[1]{\leq_{#1}^{R}}
+
+\newcommand{\AddIdCombo}{\ComboName{AddId}}
+\newcommand{\AddIdOp}[2]{\mathbin{{#2}}_{id}^{{#1}}}
+
+\newcommand{\AddAnCombo}{\ComboName{AddAn}}
+\newcommand{\AddAnOp}[2]{\mathbin{{#2}}_{an}^{{#1}}}
+
+\newcommand{\AddZeroCombo}{\ComboName{AddZero}}
+\newcommand{\AddOneCombo}{\ComboName{AddOne}}
+
+\newcommand{\ProductComboName}{\ComboName{Product}} 
+\newcommand{\ProductCombo}[2]{{#1} \times {#2}}
+\newcommand{\ProductOp}[2]{\mathbin{{}_{#1}{\times}_{#2}}}
+
+\newcommand{\LlexComboName}{\ComboName{LeftLex}} 
+\newcommand{\LlexCombo}[2]{{{#1}}\mathbin{\vec{\times}} {{#2}}} 
+\newcommand{\LlexOp}[2]{\mathbin{{}_{#1}{\vec{\times}}_{#2}}}
+
+\newcommand{\LiftComboName}{\ComboName{Lift}}
+\newcommand{\LiftCombo}[1]{\LiftComboName\ {#1}}
+\newcommand{\LiftOp}[1]{\hat{{#1}}}
+
+\newcommand{\Minset}[2]{\min({{#1}},\ {{#2}})}
+
+\newcommand{\MinsetLiftCombo}{\ComboName{MinLift}}
+\newcommand{\MinsetLiftLeftCombo}{\ComboName{MinLiftLeft}}
+\newcommand{\MinsetLiftRightCombo}{\ComboName{MinLiftRight}}
+\newcommand{\MinsetLiftOp}[2]{{#2}_{{#1}}^{\min}}
+
+\newcommand{\UnionLiftCombo}{\ComboName{UnionLift}}
+
+\newcommand{\MinsetUnionLeftCombo}{\ComboName{MinLiftLeft}}
+\newcommand{\MinsetUnionRightCombo}{\ComboName{MinLiftRight}}
+\newcommand{\MinsetUnionOp}[1]{\cup_{{#1}}^{\min}} 
+
+\newcommand{\MinsetUnionLiftLeftCombo}{\ComboName{MinUnionLiftLeft}}
+\newcommand{\MinsetUnionLiftRightCombo}{\ComboName{MinUnionLiftRight}}
+
+\newcommand{\MinsetLiftUnionLeftCombo}{\ComboName{MinLiftUnionLeft}}
+\newcommand{\MinsetLiftUnionRightCombo}{\ComboName{MinLiftUnionRight}}
+
+\newcommand{\Invariant}[3]{\propname{INV}_{{#1},{#2}}({#3})}
+\newcommand{\RequiredProps}{\propname{R}}
+\newcommand{\DecideProps}{\propname{D}}
+
+\newcommand{\DecideProp}[2]{\propname{DF}({{#1}},\ {{#2}})}
+
+
+\newcommand{\mtrx}[1]{{\mathbf{#1}}}
+\newcommand{\mstar}[1]{\mtrx{#1}^{*}}
+\newcommand{\mtrxpow}[2]{\mtrx{#1}^{#2}}
+\newcommand{\mtrxitr}[2]{\mtrx{#1}^{[#2]}}
+\newcommand{\mtrxlitr}[2]{\mtrx{#1}^{\rhd[#2]}}
+\newcommand{\mtrxritr}[2]{\mtrx{#1}^{[#2]\lhd}}
+
+\newcommand{\Zero}{\overline{0}}
+\newcommand{\One}{\overline{1}}

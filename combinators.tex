@@ -1,0 +1,186 @@
+We define map expressions as 
+\[
+r, r' := b \mid r \times r' | r + r' | r' ; r | r \circ r'
+\]
+where $b$ is a basic reduction. 
+\[
+\begin{array}{rcl}
+  ( r \times r') (a, b) & \equiv & (r(a),\ r'(b)) \\
+  ( r + r') (inl(a)) & \equiv & inl (r (a)) \\
+  ( r + r') (inr(b)) & \equiv & inl (r' (b)) \\
+  ( r' ; r)(a) & \equiv & r (r'(a)) \\    
+  ( r \circ r')(a) & \equiv & r (r'(a)) \\  
+\end{array}   
+\] 
+
+We show that the following rules obtain. 
+\[
+\begin{array}{c}
+  \begin{array}{c}
+  r \propto (S,\ \bullet) \quad \quad \quad r' \propto (T,\ \diamond) \\ \hline
+  (r \times r') \propto (S \times T,\ \bullet \times \diamond)
+  \end{array}     
+  \\
+  \\
+  \begin{array}{c}
+  r \propto (S,\ \bullet) \quad \quad \quad r' \propto (T,\ \diamond) \\ \hline
+  (r + r') \propto (S + T,\ \bullet + \diamond)
+  \end{array}     
+  \\
+  \\
+  \begin{array}{c}
+  r' \propto (S,\ \bullet) \quad \quad \quad r \propto (S_{r'},\ \bullet_{r'}) \\ \hline
+  (r' ; r) \propto (S,\ \bullet)
+  \end{array}     
+  \\
+  \\
+  \begin{array}{c}
+  r' \propto (S,\ \bullet) \quad \quad \quad r \propto (S,\ \bullet) \quad \quad \quad \forall s \in S, r(r'(s)) = r'(r(s))\\ \hline
+  (r \circ r') \propto (S,\ \bullet)
+  \end{array}     
+\end{array}   
+\] 
+The first three rules are easy to prove.
+Therefore, let us focus on look at map composition $r \circ r'$. 
+We must have
+\[
+\begin{array}{rcl}
+  S_{r \circ r'} & = & \{s \in S\mid (r \circ r')(s) = s\} \\
+               & = & \{s \in S\mid r (r' s) = s\} 
+\end{array}   
+\] 
+and 
+\[
+\begin{array}{rcl}
+\propname{RIP}(S,\ r \circ r')    
+    & \leftrightarrow 
+    & \forall x \in S,\ r(r'(r(r'(x)))) = r(r'(x))\\
+\propname{RLC}((S,\ \bullet),\ r \circ r')
+    & \leftrightarrow 
+    & \forall x, y \in S,\ r(r'((r(r'(x)) \bullet y)) = r(r'(x \bullet y))\\ 
+\propname{RRC}((S,\ \bullet),\ r \circ r')
+    & \leftrightarrow 
+    & \forall x, y \in S,\ r(r'(x \bullet r(r'(y)))) = r(r'(x \bullet y))\\ 
+\end{array}   
+\]
+It seems very difficult to come up with a general rule for this construction
+other than imposing all of the complex conditions. 
+However, we can identify a special case that is easy to work with.
+Suppose that $r$ and $r'$ \emph{commute} as maps. 
+That is, 
+\[
+r \circ r' = r' \circ r. 
+\]
+In addition, assyme that
+$r$ and $r'$ are reductions over $(S, \bullet)$. 
+Then, for 
+$\propname{RIP}(S,\ r \circ r')$
+we have
+\[
+\begin{array}{rcl}
+(r \circ r')((r \circ r')(s))
+  & =
+  & r(r'(r(r'(x)))) \\
+  & =  
+  & r'(r'(r(r(x)))) \\ 
+  & = 
+    & r'(r(r(x))) \\
+    & = 
+    & r(r'(x))\\
+    & =   
+    & (r \circ r')(s))
+\end{array}   
+\] 
+and for 
+$\propname{RLC}((S,\ \bullet),\ r \circ r')$
+we have
+\[
+\begin{array}{rcl}
+  (r \circ r')((r \circ r')(x) \bullet y)
+  & =  
+  & r(r'((r(r'(x)) \bullet y)) \\ 
+  & =
+  & r(r'((r'(r(x)) \bullet y)) \\
+  & =
+  & r(r'(r(x) \bullet y)) \\
+  & =
+  & r'(r(r(x) \bullet y)) \\
+  & =
+  & r'(r(x \bullet y)) \\
+  & =
+  & r(r'(x \bullet y)) \\
+  & =  
+  & (r \circ r')(x \bullet y)
+\end{array}   
+\] 
+A similar proof holds for
+$\propname{RRC}((S,\ \bullet),\ r \circ r')$. 
+
+\begin{theorem}
+  If $r$ and $r'$ are both reductions over $(S,\ \bullet)$ and
+  $r$ and $r'$ commute, then 
+  $r \circ r'$ is a reduction over $(S,\ \bullet)$. 
+\end{theorem}
+
+Note that the semantics of $r' ; r$ and $r \circ r'$ are the same.
+That is, 
+\[
+\begin{array}{rcl}
+  ( r' ; r)(a) & \equiv & r (r'(a)) \\    
+  ( r \circ r')(a) & \equiv & r (r'(a)) \\  
+\end{array}   
+\] 
+What is different is the pre-conditions needed in our inference rules. 
+However, an interesting question to ask this:
+When are
+$r' ; r$ and $r \circ r'$
+equal \emph{as reductions} on $(S,\ \bullet)$? 
+
+
+Suppose that  $r$ and $r'$ are reduction over $(S,\ \bullet)$ and
+$r$ and $r'$ commute. 
+Then $r$ is a reduction over $(S_{r'},\ \bullet_{r'})$.
+To see this, note that
+$\propname{RIP}(S_{r'},\ r)$
+means $\forall s \in S_{r'} r(r(s)) = s$.
+This holds since we are assuming
+$\propname{RIP}(S,\ r)$ and 
+and $S_r\subseteq S$. 
+Next, consider 
+$\propname{RLC}((S_{r'},\ \bullet_{r'}),\ r)$.
+Suppose $x, y\in S$, 
+$r'(x) = x$,  and
+$r'(y) = y$.
+Then 
+\[
+\begin{array}{rcl}
+  r(r(x) \bullet_{r'} y)
+  & =
+  r(r'(r(x) \bullet y)) \\ 
+  & =  
+  & r(r'((r(r'(x)) \bullet y)) \\ 
+  & =
+  & r(r'((r'(r(x)) \bullet y)) \\
+  & =
+  & r(r'(r(x) \bullet y)) \\
+  & =
+  & r'(r(r(x) \bullet y)) \\
+  & =
+  & r'(r(x \bullet y)) \\
+  & =
+  & r(r'(x \bullet y)) \\
+  & =  
+  & r(x \bullet_{r'} y)
+\end{array}   
+\] 
+A similar argument holds for
+$\propname{RRC}((S_{r'},\ \bullet_{r'}),\ r)$.
+
+\begin{theorem}
+  If $r$ and $r'$ are both reductions over $(S,\ \bullet)$ and
+  $r$ and $r'$ commute, then
+  $r \circ r'$ and $r' ; r$ are identical reductions over $(S,\ \bullet)$. 
+\end{theorem}
+
+What about the case where $r$ and $r'$ do not commute?
+We leave this as on open question. 

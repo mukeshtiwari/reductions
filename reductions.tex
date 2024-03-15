@@ -1,0 +1,51 @@
+
+Algebraic reductions for semigroups were fist defined
+by Wongseelashote~\cite{Wongseelashote79}.
+
+Let $r$ be a map $r \in S \rightarrow S$  and
+$(S,\ \bullet)$ a semigroup.
+Define 
+\[
+\begin{array}{rcl}
+  \mathrm{reduce}((S,\ \bullet),\ r) & \equiv & (S_r,\ \bullet_r) \\
+\end{array}  
+\]
+where
+\[
+\begin{array}{rcl} 
+S_r           & \equiv & \{s \in S\mid r(s) = s\} \\
+x \bullet_r y & \equiv & r(x \bullet y)
+\end{array}  
+\]
+If $(S_r, \ \bullet_r)$ is a semigroup, then
+we say that $r$ is a \emph{semigroup reduction}.
+
+Wongseelashote~\cite{Wongseelashote79} defined sufficient
+conditions on $r$ that ensure it is a reduction: 
+\[
+\begin{array}{rcl}
+\propname{RIP}(S,\ r)    
+    & \equiv 
+    & \forall x \in S,\ r(r(x)) = r(x)\\
+\propname{RLC}((S,\ \bullet),\ r)
+    & \equiv 
+    & \forall x, y \in S,\ r(r(x) \bullet y) = r(x \bullet y)\\ 
+\propname{RRC}((S,\ \bullet),\ r)
+    & \equiv 
+    & \forall x, y \in S,\ r(x \bullet r(y)) = r(x \bullet y)\\ 
+\end{array}   
+\]
+We will write $r \propto (S,\ \bullet)$ to mean that
+$r$ is a reduction for $(S,\ \bullet)$. 
+
+
+In a similar way, if
+$(S,\ \oplus,\ \otimes)$ is a semiring, then
+\[
+\begin{array}{rcl}
+  \mathrm{reduce}((S,\ \oplus,\ \otimes),\ r) & \equiv & (S_r,\ \oplus_r,\ \otimes_r). \\
+\end{array}  
+\]
+If this results in a semiring, then we will call $r$ a
+a \emph{semiring reduction}.
+The same sufficient conditions can be used in this case. 
